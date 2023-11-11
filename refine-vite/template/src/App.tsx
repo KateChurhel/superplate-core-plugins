@@ -1,8 +1,9 @@
-import { 
+import {
     Refine,
-    GitHubBanner, 
+    <%_ if (_app.hasRoutes === false) { _%>
     WelcomePage,
-    <%- (_app.refineImports || []).join("\n,") _%>, 
+    <%_ } _%>
+    <%- (_app.refineImports || []).join("\n,") _%>,
 } from '@refinedev/core';
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
@@ -39,14 +40,13 @@ function App() {
     <%- (_app.innerHooks || []).join("\n") %>
 
     <%- (_app.inner || []).join("\n") %>
-    
+
     return (
         <BrowserRouter>
-        <GitHubBanner />
         <RefineKbarProvider>
             <%- top.join("\n") %>
             <DevtoolsProvider>
-                <Refine <%- (_app.refineProps || []).join("\n") %> 
+                <Refine <%- (_app.refineProps || []).join("\n") %>
                     <%_ if (_app.hasRoutes === true) { _%>
                         resources={[
                             <%_ if (answers["data-provider"] === 'data-provider-strapi-v4') { _%>
@@ -255,7 +255,7 @@ function App() {
                             </Route>
                             <Route path="*" element={<ErrorComponent />} />
                         </Route>
-                    </Routes> 
+                    </Routes>
                     <%_ } _%>
 
                     <%_ if (_app.hasRoutes === false) { _%>
